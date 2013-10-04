@@ -1,0 +1,15 @@
+{
+    "require": {
+	"silex/silex": "1.*",
+	"twig/twig": ">=1.8,<2.0-dev",
+        "propel/propel1": "1.6.9",
+	"craftyshadow/propel-equalnest-behavior": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+	    "src/models/build/classes/hwtest_iplesca/",
+	    "src/controllers/",
+	    "src/views/"
+	]
+    }
+}

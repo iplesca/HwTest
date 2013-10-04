@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block header %}
+        <title>{{ title }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="{{ app.request.basepath }}/assets/css/main.css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        <div class="hblock">
+            <ul>
+            {% for u in users %}
+                <li><a href="{{ app.url_generator.generate('userspage', {id : u['Id']}) }}">{{ u['Firstname'] }} {{ u['Lastname'] }}</a></li>
+            {% endfor %}
+            </ul>
+            </br>
+        </div>
+        {% endblock %}
+    </body>
+</html>

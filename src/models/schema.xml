@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="hwtest_iplesca" defaultIdMethod="native">
+    <table name="users" phpName="User" description="User table">
+        <column name="id" type="integer" size="10" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="firstname" type="varchar" size="50" required="true" />
+        <column name="lastname" type="varchar" size="50" required="false" defaultValue="" />
+        <column name="gender" type="tinyint" size="2" required="true" description="1 = male, 0 = female"/>
+        <column name="age" type="integer" size="3" required="true"/>
+        
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    
+    <table name="friends" phpName="Friend" isCrossRef="true" description="Friends table defines 1:n relations of users">
+        <column name="id" type="integer" size="10" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="userId" type="integer" size="10" required="true" description="users table id"/>
+        <column name="friendId" type="integer" size="10" required="true" defaultValue="null" description="users table id of friend" />
+        
+        <behavior name="equal_nest">
+            <parameter name="parent_table" value="users" />
+            <parameter name="reference_column_1" value="userId" />
+            <parameter name="reference_column_2" value="friendId" />
+        </behavior>
+        
+        <unique name="aToB">
+          <unique-column name="userId" />
+          <unique-column name="friendId" />
+        </unique>
+        
+        <index name="userId">
+          <index-column name="userId" />
+        </index>
+        
+        <index name="friendId">
+          <index-column name="friendId" />
+        </index>
+        
+        
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+
+    <table name="cities" phpName="City" description="Cities table">
+        <column name="id" type="integer" size="5" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" size="60" required="true" />
+        
+        <unique name="name">
+          <unique-column name="name" />
+        </unique>
+        
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+    
+    <table name="visitedcities" phpName="VisitedCity" description="1:n user to visited cities">
+        <column name="id" type="integer" size="10" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="userId" type="integer" size="10" required="true" />
+        <column name="cityId" type="integer" size="5" required="true" />
+        <column name="rating" type="tinyint" size="2" required="true" description="0 means 100%"/>
+        
+        <unique name="userCity">
+          <unique-column name="userId" />
+          <unique-column name="cityId" />
+        </unique>
+        
+        <index name="userId">
+          <index-column name="userId" />
+        </index>
+        
+        <index name="cityId">
+          <index-column name="cityId" />
+        </index>
+        
+        <foreign-key foreignTable="users" phpName="User" onDelete="cascade" onUpdate="cascade">
+            <reference local="userId" foreign="id"/>
+        </foreign-key>
+        
+        <foreign-key foreignTable="cities" phpName="City" onDelete="cascade" onUpdate="cascade">
+            <reference local="cityId" foreign="id"/>
+        </foreign-key>
+        
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+</database>

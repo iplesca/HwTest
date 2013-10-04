@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block content %}
+<fieldset class="userinfo">
+    <legend><a href="{{ app.url_generator.generate('homepage') }}"><small>&laquo;list</small></a>&nbsp;&nbsp;[&nbsp;{{ userdata['Firstname'] }} {{ userdata['Lastname'] }}&nbsp;]</legend>
+    <div class="hblock">
+        Direct friends: <br>
+        <ul>
+        {% for dude in friends %}
+            <li><a href="{{ app.url_generator.generate('userspage', {id : dude['Id']}) }}">{{ dude['Firstname'] }} {{ dude['Lastname'] }}</a></li>
+        {% endfor %}
+        </ul>
+        </br>
+    </div>
+    <div class="hblock">
+        Friends of friends: <br>
+        <ul>
+        {% for dude in friendsOfFriends %}
+            <li><a href="{{ app.url_generator.generate('userspage', {id : dude['Id']}) }}">{{ dude['Firstname'] }} {{ dude['Lastname'] }}</a></li>
+        {% endfor %}
+        </ul>
+        </br>
+    </div>
+    <div class="hblock">
+        Suggested friends: <br>
+        <ul>
+        {% for dude in suggestedFriends %}
+            <li><a href="{{ app.url_generator.generate('userspage', {id : dude['Id']}) }}">{{ dude['Firstname'] }} {{ dude['Lastname'] }}</a></li>
+        {% endfor %}
+        </ul>
+        </br>
+    </div>
+    <div class="hblock">
+        Suggested cities: <br>
+        <ul>
+        {% for city in suggestedCities %}
+            <li>{{ city['Name'] }} <span>{{ city['Rating'] }}%</span></li>
+        {% endfor %}
+        </ul>
+        </br>
+    </div>
+</fieldset>
+{% endblock %}

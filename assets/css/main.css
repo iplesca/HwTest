@@ -1,0 +1,29 @@
+body {
+    font-family:Tahoma;
+}
+.hblock, ul, fieldset {
+    display: inline-block;
+}
+.hblock {
+    vertical-align: top;
+    margin-right:40px;
+    padding:10px;
+}
+fieldset {
+    border-width:1px;
+}
+legend {
+    font-weight:bold;
+    font-size:18px;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+li span {
+    float:right;
+    margin-left:20px;
+    font-weight: bold;
+}
